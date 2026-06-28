@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "rpipicofootprint")(type "KiCad")(uri "${KIPRJMOD}/rpipicofootprint.pretty")(options "")(descr ""))
+)
