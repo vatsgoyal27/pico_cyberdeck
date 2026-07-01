@@ -17,7 +17,7 @@ This makes the build process, inter-module communication, and system architectur
 | Module | Role | Status |
 |---|---|---|
 | **Display + Audio Driver** | Drives VGA output and mono audio | ✅ Complete |
-| **Input Handler — Split Keyboard + Joystick** | Custom split keyboard with integrated analog joystick | 🚧 In progress |
+| **Input Handler — Keyboard + Joystick** | Custom mechanical keyboard with integrated analog joystick | ✅ Complete |
 | **UI Controller** | Renders menus/interface, coordinates modules | 🚧 In progress |
 | **Network Scanner** | Wi-Fi/network scanning and analysis | 🚧 In progress |
 
@@ -52,19 +52,16 @@ Schematic and PCB design complete (KiCad, rev. 2026-06-01). Firmware for video t
 
 ---
 
-## Sub-Project: Input Handler — Split Keyboard + Joystick 🚧
+## Sub-Project: Input Handler — Keyboard + Joystick ✅
 
-A custom split mechanical keyboard with an integrated analog joystick, serving as the cyberdeck's primary input module. Powered by its own Raspberry Pi Pico (RP2040).
+A custom mechanical keyboard with an integrated analog joystick, serving as the cyberdeck's primary input module. Powered by its own Raspberry Pi Pico (RP2040).
 
 ### Overview
 
-This module is a fully custom split keyboard PCB featuring an analog joystick for cursor/pointer control alongside the key matrix. It's built around a Raspberry Pi Pico, with onboard Li-Po battery charging for wireless/portable use.
-
-**Note:** The split version is still in progress — the current design has not yet been split into two independent halves.
+This module is a fully custom keyboard PCB featuring an analog joystick for cursor/pointer control alongside the key matrix. It's built around a Raspberry Pi Pico, with onboard Li-Po battery charging for wireless/portable use.
 
 ### Features
 
-- **Split ergonomic layout** — two independent PCB halves *(in progress)*
 - **~44 mechanical key switches** with per-switch diodes for matrix scanning
 - **Integrated analog joystick** for mouse/pointer input
 - **Raspberry Pi Pico (RP2040)** as the onboard microcontroller
@@ -81,20 +78,19 @@ This module is a fully custom split keyboard PCB featuring an analog joystick fo
 | Diodes | Per-key diodes (1N4148 or similar) for matrix scanning |
 | Charging | TP4056 Micro-USB/USB-C Li-Po charger |
 | Input | Analog joystick module |
-| Connectors | 2x05 and 2x10 pin sockets (inter-board / peripheral connections) |
+| Connectors | 2x05 and 2x10 pin sockets (peripheral connections) |
 | Battery | Li-Po (connector on board) |
 
 ### Assembly
 
-1. Solder switches and diodes to each half.
+1. Solder switches and diodes to the board.
 2. Mount the Raspberry Pi Pico and TP4056 charging module.
 3. Connect the joystick module to its designated header.
-4. Connect the two halves via the inter-board connector *(once split design is complete)*.
-5. Flash firmware and test the key matrix + joystick input.
+4. Flash firmware and test the key matrix + joystick input.
 
 ### Status
 
-🚧 Work in progress — single-board hardware design complete, split version and firmware still in development.
+Hardware design complete. Firmware: *document current state here.*
 
 ---
 
@@ -112,7 +108,7 @@ Each module runs independently on its own Pico / Pico 2 W. Firmware approach (Mi
 
 ## Status
 
-🚧 Work in progress — Display + Audio module complete; Input Handler (split keyboard + joystick), UI, and Network Scanner modules in development.
+🚧 Work in progress — Display + Audio and Input Handler modules complete; UI and Network Scanner modules in development.
 
 ## License
 
