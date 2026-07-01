@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "tp4056_module")(type "KiCad")(uri "${KIPRJMOD}/tp4056_module.pretty")(options "")(descr ""))
+)
