@@ -1,6 +1,6 @@
 # Modular Pico Cyberdeck
 
-A custom cyberdeck built entirely around Raspberry Pi Pico 2 W boards instead of a traditional single-board computer (e.g. Raspberry Pi 4/5). Rather than one processor running the whole device, the deck is split into independent modules — each powered by its own Pico 2 W — handling a specific subsystem: display/audio, input (keyboard + joystick), UI, and network scanning.
+A custom cyberdeck built entirely around Raspberry Pi Pico 2 W boards instead of a traditional single-board computer (e.g. Raspberry Pi 4/5). Rather than one processor running the whole device, the deck is split into independent modules — each powered by its own Pico 2 W — handling a specific subsystem: display/audio, input (keyboard + joystick), Spotify display, UI, and network scanning.
 
 ## Why This Is Different
 
@@ -18,6 +18,7 @@ This makes the build process, inter-module communication, and system architectur
 |---|---|---|
 | **Display + Audio Driver** | Drives VGA output and mono audio | ✅ Complete |
 | **Input Handler — Keyboard + Joystick** | Custom mechanical keyboard with integrated analog joystick | ✅ Complete |
+| **Spotify Pico Display** | LCD + TFT display module with joystick control | ✅ Complete |
 | **UI Controller** | Renders menus/interface, coordinates modules | 🚧 In progress |
 | **Network Scanner** | Wi-Fi/network scanning and analysis | 🚧 In progress |
 
@@ -90,7 +91,57 @@ This module is a fully custom keyboard PCB featuring an analog joystick for curs
 
 ### Status
 
-Hardware design complete. Firmware: *document current state here.*
+Hardware and firmware complete.
+
+---
+
+## Sub-Project: Spotify Pico Display ✅
+
+A display module combining a character LCD and a TFT screen with joystick input, driven by a Raspberry Pi Pico 2 W. Displays Spotify playback info (album art, track data) on the cyberdeck.
+
+### Pinout
+
+**MCU:** Raspberry Pi Pico 2 W
+
+**LCD (LiquidCrystal — 4-bit mode)**
+
+| Function | GPIO |
+|----------|------|
+| RS       | 2    |
+| EN       | 3    |
+| D4       | 4    |
+| D5       | 5    |
+| D6       | 6    |
+| D7       | 7    |
+
+**Joystick (Analog)**
+
+| Function | GPIO | Notes        |
+|----------|------|--------------|
+| X        | 26   | ADC0         |
+| Y        | 27   | ADC1         |
+| SW       | 22   | INPUT_PULLUP |
+
+**TFT Display (ST7735 — SPI)**
+
+| Function | GPIO |
+|----------|------|
+| CS       | 17   |
+| DC       | 20   |
+| RST      | 21   |
+| SCK      | 18   |
+| MOSI     | 19   |
+| MISO     | 16   |
+
+### Notes
+
+The temporary GIF display is implemented using [image_to_c](https://github.com/bitbank2/image_to_c).
+
+![Wiring diagram](spotify_api_display_controller/wiring.jpeg)
+
+### Status
+
+Hardware and firmware complete.
 
 ---
 
@@ -108,12 +159,4 @@ Each module runs independently on its own Pico / Pico 2 W. Firmware approach (Mi
 
 ## Status
 
-🚧 Work in progress — Display + Audio and Input Handler modules complete; UI and Network Scanner modules in development.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## Contributing
-
-Issues and pull requests are welcome — whether it's hardware revisions, firmware, or documentation improvements.
+🚧 Work in progress — Display + Audio, Input Handler, and Spotify Pico Display modules complete; UI and Network Scanner modules in development.
