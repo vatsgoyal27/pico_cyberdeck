@@ -1,6 +1,6 @@
 # Modular Pico Cyberdeck
 
-A custom cyberdeck built entirely around Raspberry Pi Pico 2 W boards instead of a traditional single-board computer (e.g. Raspberry Pi 4/5). Rather than one processor running the whole device, the deck is split into independent modules — each powered by its own Pico 2 W — handling a specific subsystem: display/audio, UI, input, and network scanning.
+A custom cyberdeck built entirely around Raspberry Pi Pico 2 W boards instead of a traditional single-board computer (e.g. Raspberry Pi 4/5). Rather than one processor running the whole device, the deck is split into independent modules — each powered by its own Pico 2 W — handling a specific subsystem: display/audio, input (keyboard + joystick), UI, and network scanning.
 
 ## Why This Is Different
 
@@ -17,15 +17,15 @@ This makes the build process, inter-module communication, and system architectur
 | Module | Role | Status |
 |---|---|---|
 | **Display + Audio Driver** | Drives VGA output and mono audio | ✅ Complete |
+| **Input Handler — Split Keyboard + Joystick** | Custom split keyboard with integrated analog joystick | 🚧 In progress |
 | **UI Controller** | Renders menus/interface, coordinates modules | 🚧 In progress |
-| **Input Handler** | Keyboard/button/joystick input | 🚧 In progress |
 | **Network Scanner** | Wi-Fi/network scanning and analysis | 🚧 In progress |
 
-Inter-module communication method (e.g. I2C/SPI/UART bus, or Wi-Fi between Pico 2 W boards)
+Inter-module communication method (e.g. I2C/SPI/UART bus, or Wi-Fi between Pico 2 W boards) — *TBD, document once finalized.*
 
 ---
 
-## Sub-Project: VGA + Audio Driver ✅
+## Sub-Project: Display + Audio Driver ✅
 
 The first completed module. A Raspberry Pi Pico generates analog VGA video output and drives a mono audio amplifier.
 
@@ -52,18 +52,72 @@ Schematic and PCB design complete (KiCad, rev. 2026-06-01). Firmware for video t
 
 ---
 
+## Sub-Project: Input Handler — Split Keyboard + Joystick 🚧
+
+A custom split mechanical keyboard with an integrated analog joystick, serving as the cyberdeck's primary input module. Powered by its own Raspberry Pi Pico (RP2040).
+
+### Overview
+
+This module is a fully custom split keyboard PCB featuring an analog joystick for cursor/pointer control alongside the key matrix. It's built around a Raspberry Pi Pico, with onboard Li-Po battery charging for wireless/portable use.
+
+**Note:** The split version is still in progress — the current design has not yet been split into two independent halves.
+
+### Features
+
+- **Split ergonomic layout** — two independent PCB halves *(in progress)*
+- **~44 mechanical key switches** with per-switch diodes for matrix scanning
+- **Integrated analog joystick** for mouse/pointer input
+- **Raspberry Pi Pico (RP2040)** as the onboard microcontroller
+- **USB-C charging** via TP4056 charge controller for a Li-Po battery
+- **Mounting holes** for case/plate assembly
+- Designed entirely in **KiCad** (schematic + PCB layout)
+
+### Hardware
+
+| Component | Details |
+|---|---|
+| MCU | Raspberry Pi Pico |
+| Switches | ~44x mechanical key switches (SW1–SW44) |
+| Diodes | Per-key diodes (1N4148 or similar) for matrix scanning |
+| Charging | TP4056 Micro-USB/USB-C Li-Po charger |
+| Input | Analog joystick module |
+| Connectors | 2x05 and 2x10 pin sockets (inter-board / peripheral connections) |
+| Battery | Li-Po (connector on board) |
+
+### Assembly
+
+1. Solder switches and diodes to each half.
+2. Mount the Raspberry Pi Pico and TP4056 charging module.
+3. Connect the joystick module to its designated header.
+4. Connect the two halves via the inter-board connector *(once split design is complete)*.
+5. Flash firmware and test the key matrix + joystick input.
+
+### Status
+
+🚧 Work in progress — single-board hardware design complete, split version and firmware still in development.
+
+---
+
 ## Getting Started
 
 ### Hardware
 
-1. Open each module's KiCad project.
+1. Open each module's KiCad project under its respective folder.
 2. Export Gerbers/fabrication files per module as needed.
 3. Reference the shared design notes (trace impedance, connector pinouts) across modules for consistency.
 
 ### Firmware
 
-Each module runs independently on its own Pico 2 W. Firmware approach (MicroPython / CircuitPython / C SDK) — *to be finalized per module.*
+Each module runs independently on its own Pico / Pico 2 W. Firmware approach (MicroPython / CircuitPython / C SDK) — to be finalized per module.
 
 ## Status
 
-🚧 Work in progress — VGA + audio module complete; UI, input, and network scanning modules in development.
+🚧 Work in progress — Display + Audio module complete; Input Handler (split keyboard + joystick), UI, and Network Scanner modules in development.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Contributing
+
+Issues and pull requests are welcome — whether it's hardware revisions, firmware, or documentation improvements.
