@@ -1,5 +1,5 @@
 # Modular Pico Cyberdeck
-!(image.png)
+![Display Setup in Fusion360](image.png)
 A custom cyberdeck built entirely around Raspberry Pi Pico 2 W boards instead of a traditional single-board computer (e.g. Raspberry Pi 4/5). Rather than one processor running the whole device, the deck is split into independent modules — each powered by its own Pico 2 W — handling a specific subsystem: display/audio, input (keyboard + joystick), Spotify display, UI, and network scanning.
 
 ## Why This Is Different
